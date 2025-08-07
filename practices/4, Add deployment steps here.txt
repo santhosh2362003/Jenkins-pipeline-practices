@@ -1,0 +1,80 @@
+//4, Add deployment steps here
+
+} else {
+
+echo "Skipping deployment to Production as per user input"
+
+}
+
+}
+}
+
+}
+}
+
+//credential example
+pipeline {
+    agent any
+       stage {
+           stage('stage 1'){
+                  step {
+            withCredentials([usernamePassword(credential: 'cred-01', usernamevariable: 'u', passwordVariable: 'p',])
+          echo"Username: ${u}"
+           echo"Password: ${p}"
+    //use the credential in your steps
+    //for example,you can pass them as environment varible to a shell commends
+         sh"echo'hello' | curl -u${u}:${p} https://example.com"
+       }
+    }
+  }
+ } 
+}
+
+
+//global use:
+
+pipeline{
+      agent any
+      environment {
+      MY_SECURET_CREDS = credential('cred-999')
+                  }
+               stage {
+                  stage('stage 1'){
+                      steps {
+                 echo"Accessing the secret:${env.MY_SECRET_CREDS}"
+      //USE THE MY_SECURET_CREDS variable to access the credential within the pipeline steps
+     // for example ,you can it to autherntication to a services or use it as needs.
+                 }
+         }
+    }
+}
+
+
+//paralle code
+
+pipeline {
+    agent any
+       stages {
+          stage('paralle stage'){
+       paralle{
+                 {
+               steps ('steps 1'){
+                      steps {
+                           script {
+         for ( int i=1;i<=10:i++){
+            echo"hello$i"
+         }
+      }
+    }
+}
+          stage('stage 2'){
+      steps {script  {
+for(int i=1;i<=10;i++) {
+echo"world$i"
+     }
+    }
+    }
+ }
+ }
+}
+

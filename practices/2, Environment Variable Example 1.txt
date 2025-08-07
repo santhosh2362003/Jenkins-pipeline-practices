@@ -1,0 +1,15 @@
+//2, Environment Variable Example 1
+pipeline {
+agent any
+environment {
+Name "Mithran"
+Age = "26"
+City = "Chennai"
+}
+stages {
+stage('Stage 1') {
+echo "I am ${env.Name) of age $(env.Age) living in ${env.City}"
+}
+}
+}
+}

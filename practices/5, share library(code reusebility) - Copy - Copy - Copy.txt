@@ -1,0 +1,12 @@
+//5, share library:(code reusebility)
+@library("libraryname" _
+pipeline{
+   agent any {
+       stages {
+          stage('hello') {
+            steps {
+                   helloWorld()
+                  }
+              }
+             }
+}

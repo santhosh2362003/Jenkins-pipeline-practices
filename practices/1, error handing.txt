@@ -1,0 +1,24 @@
+//1, error handing
+
+post {
+always {
+      //achive test reports
+      echo' i will always run'
+       }
+success {
+      //only execute this block if the test pass
+      echo'tests passed successfully'
+       }
+failure {
+      //execute this block if the test fail
+      echo'tests failed'
+      }
+     
+ }
+
+
+steps {
+catcherror(buildResult:'Failure',stageReslt:'failure')
+{
+   echo''
+}
